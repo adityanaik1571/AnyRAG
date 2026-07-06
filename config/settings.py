@@ -1,4 +1,8 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+from core.enums import LLMProvider
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -6,7 +10,7 @@ class Settings(BaseSettings):
         case_sensitive=False,
         extra="ignore",
     )
-    llm_provider: str
+    llm_provider: LLMProvider
     llm_model: str
     embedding_provider: str
     embedding_model: str

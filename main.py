@@ -4,5 +4,11 @@ def main():
     response = llm.invoke(
         "In one sentence, what is Retrieval-Augmented Generation?")
     print(response)
+
+
+
 if __name__ == "__main__":
-    main()
+    llm = LLMFactory.create()
+
+    print(llm.provider)
+    print(type(llm.provider))
