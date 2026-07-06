@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     llm_model: str
     embedding_provider: str
     embedding_model: str
+    groq_api_key: str
     log_level: str = "INFO"
 
 settings = Settings()
