@@ -10,5 +10,6 @@ class Settings(BaseSettings):
     llm_model: str
     embedding_provider: str
     embedding_model: str
+    log_level: str = "INFO"
 
 settings = Settings()
