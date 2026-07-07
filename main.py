@@ -1,14 +1,23 @@
 from services.loaders.providers.pdf_loader import PDFLoader
+from services.splitters.factory import SplitterFactory
+from services.splitters.strategies.recursive_splitter import RecursiveSplitter
+from services.loaders.factory import LoaderFactory
 
 def main():
-    loader = PDFLoader("data/sample.pdf")
+    loader = LoaderFactory.create("data/sample-2.pdf")
     documents = loader.load()
-    print(f"Loaded {len(documents)} pages.\n")
-    first_page = documents[0]
-    print("Metadata:")
-    print(first_page.metadata)
+    splitter= SplitterFactory.create()
+    chunks = splitter.split(documents)
+    print(f"Original documents: {len(documents)}")
+    print(f"Chunks created: {len(chunks)}")
+    first_chunk = chunks[0]
+
+    print("\nMetadata:")
+    print(first_chunk.metadata)
+
     print("\nContent Preview:")
-    print(first_page.page_content[:300])
+    print(first_chunk.page_content[:300])
+
 
 if __name__ == "__main__":
     main()

@@ -1,6 +1,5 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
-
-from core.enums import LLMProvider
+from core.enums import LLMProvider, SplitterStrategy
 
 
 class Settings(BaseSettings):
@@ -15,6 +14,9 @@ class Settings(BaseSettings):
     embedding_provider: str
     embedding_model: str
     groq_api_key: str
+    chunk_size: int
+    chunk_overlap: int
+    text_splitter: SplitterStrategy
     log_level: str = "INFO"
 
 settings = Settings()
