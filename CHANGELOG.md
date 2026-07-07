@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.0] - 2026-07-07
+
+### Added
+- Introduced BaseSplitter abstraction.
+- Implemented RecursiveSplitter strategy.
+- Added SplitterFactory with registry-based strategy selection.
+- Added configurable chunk size and chunk overlap.
+- Verified metadata preservation during document splitting.
+
 ## [0.6.0] - 2026-07-07
 
 ### Added
