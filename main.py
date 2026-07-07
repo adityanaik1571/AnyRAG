@@ -1,22 +1,11 @@
-from services.loaders.providers.pdf_loader import PDFLoader
-from services.splitters.factory import SplitterFactory
-from services.splitters.strategies.recursive_splitter import RecursiveSplitter
-from services.loaders.factory import LoaderFactory
+from services.embeddings.factory import EmbeddingFactory
 
 def main():
-    loader = LoaderFactory.create("data/sample-2.pdf")
-    documents = loader.load()
-    splitter= SplitterFactory.create()
-    chunks = splitter.split(documents)
-    print(f"Original documents: {len(documents)}")
-    print(f"Chunks created: {len(chunks)}")
-    first_chunk = chunks[0]
+    embedding_provider = EmbeddingFactory.create()
 
-    print("\nMetadata:")
-    print(first_chunk.metadata)
+    embedding_model = embedding_provider.get_embedding_model()
 
-    print("\nContent Preview:")
-    print(first_chunk.page_content[:300])
+    print(type(embedding_model))
 
 
 if __name__ == "__main__":
