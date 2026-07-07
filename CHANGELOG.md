@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.0] - 2026-07-07
+
+### Added
+- Introduced `BaseLoader` abstraction.
+- Implemented `PDFLoader` using LangChain `PyPDFLoader`.
+- Added `LoaderFactory` with registry-based loader selection.
+- Added structured logging for document loading.
+- Verified extraction of `Document` objects and metadata.
+
+## [0.5.0] - 2026-07-07
+
+### Changed
+- Introduced `LLMProvider` enum for type-safe provider selection.
+- Replaced string-based provider comparisons with enum values.
+- Updated configuration, factory, and provider implementations to use enums.
+- Removed magic strings from the LLM architecture.
+
 ## [0.3.0] - 2026-07-06
 
 ### Added
@@ -11,7 +28,7 @@ All notable changes to this project will be documented in this file.
 - Integrated the framework with the Groq API
 - Completed the first end-to-end LLM invocation through the provider architecture
 
-## [0.1.0] - 06-07-2026
+## [0.1.0] - 2026-07-06
 
 ### Added
 - Initial project structure
