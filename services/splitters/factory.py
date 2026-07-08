@@ -1,4 +1,3 @@
-from config.settings import settings
 from core.enums import SplitterStrategy
 from core.logger import get_logger
 from services.splitters.base import BaseSplitter
