@@ -1,5 +1,5 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from core.enums import LLMProvider, SplitterStrategy, EmbeddingProvider
+from core.enums import LLMProvider, SplitterStrategy, EmbeddingProvider, VectorStoreProvider
 
 
 class Settings(BaseSettings):
@@ -17,6 +17,10 @@ class Settings(BaseSettings):
     chunk_size: int
     chunk_overlap: int
     text_splitter: SplitterStrategy
+    chroma_persist_directory: str
+    chroma_collection_name: str
+    vector_store_provider: VectorStoreProvider
+    retrieval_top_k: int
     log_level: str = "INFO"
 
 settings = Settings()

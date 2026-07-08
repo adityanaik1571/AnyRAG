@@ -8,3 +8,6 @@ class SplitterStrategy(Enum):
 
 class EmbeddingProvider(str, Enum):
     HUGGINGFACE = "huggingface"
+
+class VectorStoreProvider(str, Enum):
+    CHROMA = "chroma"
