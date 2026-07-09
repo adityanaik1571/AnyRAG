@@ -21,6 +21,7 @@ class IngestionService:
         splitter = SplitterFactory.create()
         chunks = splitter.split(documents)
         logger.info("Storing document chunks...")
+        self.vector_store.reset()
         self.vector_store.store(chunks)
 
 

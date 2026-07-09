@@ -21,3 +21,7 @@ class ChromaVectorStoreProvider(BaseVectorStore):
     def retrieve(self, query):
         logger.info(f"Searching VectorStore for {query}")
         return self.vector_store.similarity_search(query=query, k=settings.retrieval_top_k)
+
+    def reset(self):
+        logger.info(f"Resetting collection: {settings.chroma_collection_name}")
+        self.vector_store.reset_collection()
