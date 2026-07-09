@@ -13,3 +13,7 @@ class BaseVectorStore(ABC):
     def retrieve(self, query: str) -> List[Document]:
         """Retrieve the most relevant documents for a query."""
         raise NotImplementedError("Vector Store not implemented yet.")
+    @abstractmethod
+    def reset(self) -> None:
+        """Clear the store."""
+        raise NotImplementedError("Vector Store not implemented yet.")

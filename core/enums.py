@@ -11,3 +11,7 @@ class EmbeddingProvider(str, Enum):
 
 class VectorStoreProvider(str, Enum):
     CHROMA = "chroma"
+
+class InstructionInterpreterProvider(str, Enum):
+    SEMANTIC = "semantic"
+    HYBRID = "hybrid"
