@@ -18,9 +18,9 @@ class ChromaVectorStoreProvider(BaseVectorStore):
         logger.info(f"Storing {len(documents)} documents in ChromaDB")
         self.vector_store.add_documents(documents)
 
-    def retrieve(self, query):
+    def retrieve(self, query, filter=None):
         logger.info(f"Searching VectorStore for {query}")
-        return self.vector_store.similarity_search(query=query, k=settings.retrieval_top_k)
+        return self.vector_store.similarity_search(query=query, k=settings.retrieval_top_k, filter=filter)
 
     def reset(self):
         logger.info(f"Resetting collection: {settings.chroma_collection_name}")

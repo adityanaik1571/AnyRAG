@@ -36,6 +36,9 @@ class PromptBuilder:
 
         for index, document in enumerate(documents, start=1):
             prompt.append(f"[Document {index}]")
+            prompt.append(f"Source: {document.metadata.get('source', 'Unknown')}")
+            prompt.append(f"Page: {document.metadata.get('page_label', 'Unknown')}")
+            prompt.append("")
             prompt.append(document.page_content)
             prompt.append("")
 

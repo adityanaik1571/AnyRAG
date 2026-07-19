@@ -1,6 +1,6 @@
 import json
 
-INTERPRETER_PROMPT_VERSION = "1.0"
+INTERPRETER_PROMPT_VERSION = "1.1"
 
 INTERPRETER_SYSTEM_PROMPT = """
 You are AnyRAG's Semantic Instruction Interpreter.
@@ -22,10 +22,10 @@ Extract the following fields:
   The persona or expertise the AI should assume.
 
 - context:
-  The source of information the AI should use.
+  The source of information the AI should use (e.g., "Attached PDF", "Page 6 of the document").
 
 - objective:
-  The primary task the user wants completed.
+  The primary task the user wants completed. You MUST retain specific details, targets, or page numbers (e.g., write "Summarize page 6", not just "Summarize the page").
 
 - output:
   The desired response format.
@@ -35,8 +35,8 @@ Extract the following fields:
 
 Guidelines:
 
-- Preserve the user's intent.
-- Never invent information.
+- Preserve the user's exact intent and specific details.
+- Never invent information or overly abstract the objective.
 - If a field is missing, return null.
 - Constraints must always be returned as a JSON array.
 - If no constraints exist, return an empty array.
@@ -92,11 +92,11 @@ INTERPRETER_FEW_SHOT_EXAMPLES = [
         }
     },
     {
-        "input": "Summarize the attached PDF.",
+        "input": "Summarize page 6 of the attached PDF.",
         "output": {
             "role": None,
-            "context": "Attached PDF",
-            "objective": "Summarize the document",
+            "context": "Page 6 of the attached PDF",
+            "objective": "Summarize page 6",
             "output": None,
             "constraints": []
         }
