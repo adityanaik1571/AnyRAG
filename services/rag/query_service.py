@@ -4,6 +4,7 @@ from services.vectorstores.factory import VectorStoreFactory
 from core.logger import get_logger
 from services.reasoning.interpreter.factory import InstructionInterpreterFactory
 from services.llm.factory import LLMFactory
+from langchain_core.chat_history import InMemoryChatMessageHistory
 import re
 
 logger = get_logger(__name__)
@@ -15,6 +16,8 @@ class QueryService:
         self.vector_store = VectorStoreFactory.create(embedding_model=self.embedding_model)
         self.llm_provider = LLMFactory.create()
         self.instruction_interpreter = InstructionInterpreterFactory.create(self.llm_provider)
+        self.chat_history = InMemoryChatMessageHistory()
+
     def ask(self, user_input: str) -> str:
         logger.info(f"Received query: {user_input}")
         logger.info("Retrieving relevant documents...")
@@ -28,6 +31,9 @@ class QueryService:
 
         logger.info(f"Retrieved {len(documents)} relevant documents.")
         prompt = PromptBuilder.build(instruction, documents)
+        history_text = ""
+        for message in self.chat_history.messages:
+            history_text += f"{message.text}\n"
         logger.info(prompt)
         logger.info("Generating final response...")
         answer = self.llm_provider.invoke(prompt)
