@@ -3,7 +3,7 @@ from services.rag.query_service import QueryService
 
 def main():
     ingestion_service = IngestionService()
-    ingestion_service.ingest("file path")
+    ingestion_service.ingest(["file path", "another file path"])
     query_service = QueryService()
     while True:
         question = input("Ask a Question: ")

@@ -12,16 +12,17 @@ class IngestionService:
         embedding_model = embedding_provider.get_embedding_model()
         self.vector_store = VectorStoreFactory.create(embedding_model=embedding_model)
 
-    def ingest(self, file_path: str) -> None:
-        logger.info(f"Ingesting document: {file_path}")
-        loader = LoaderFactory.create(file_path=file_path)
-        logger.info("Loading documents...")
-        documents = loader.load()
-        logger.info("Splitting documents...")
-        splitter = SplitterFactory.create()
-        chunks = splitter.split(documents)
-        logger.info("Storing document chunks...")
+    def ingest(self, file_paths: list[str]) -> None:
         self.vector_store.reset()
-        self.vector_store.store(chunks)
+        splitter = SplitterFactory.create()
+        for file_path in file_paths:
+            logger.info(f"Ingesting document: {file_path}")
+            loader = LoaderFactory.create(file_path=file_path)
+            logger.info("Loading documents...")
+            documents = loader.load()
+            logger.info("Splitting documents...")
+            chunks = splitter.split(documents)
+            logger.info(f"Storing {len(chunks)} chunks...")
+            self.vector_store.store(chunks)
 
 
